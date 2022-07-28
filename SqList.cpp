@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+using namespace std;
 
 #define MAXSIZE 100
 #define TRUE 1
@@ -9,20 +11,18 @@
 #define OVERFLOW -2
 
 typedef int Status;
-typedef char ElemType;
 
-typedef struct
+typedef struct elemtype
 {
-    char ISBN[20];
-    char name[50];
-    float price;
-} elem;
+    char name[20];
+    char sex;
+    int score;
+} ElemType;
 
-typedef struct
+typedef struct sqlist
 {
     ElemType *elem;
     int length;
-    int listsize;
 } SqList;
 
 Status InitList_Sq(SqList &L)
@@ -33,7 +33,6 @@ Status InitList_Sq(SqList &L)
         exit(OVERFLOW);
     }
     L.length = 0;
-    L.listsize = MAXSIZE;
     return OK;
 }
 
@@ -66,10 +65,13 @@ Status GetElem(SqList L, Status i, ElemType &e)
     return OK;
 }
 
-Status LocateElem(SqList &L, Status i, ElemType e)
+Status LocateElem(SqList L, ElemType e)
 {
-    if (L.elem[i] == e)
-        return i + 1;
+    for (int i = 0; i < L.length; i++)
+    {
+        if (L.elem[i] == e)
+            return i + 1;
+    }
     return 0;
 }
 
@@ -88,19 +90,20 @@ Status ListInsert_Sq(SqList &L, Status i, ElemType e)
     return OK;
 }
 
-Status ListDelete_Sq(SqList &L,Status i,ElemType e){
-    if (i<1||i>L.length) return ERROR;
-    for (int j = i; j <= L.length-1; j++)
+Status ListDelete_Sq(SqList &L, Status i, ElemType e)
+{
+    if (i < 1 || i > L.length)
+        return ERROR;
+    for (int j = i; j <= L.length - 1; j++)
     {
-        L.elem[j-1]=L.elem[j];
+        L.elem[j - 1] = L.elem[j];
     }
-    L.length--;    
+    L.length--;
     return OK;
 }
 
 int main(int argc, char const *argv[])
 {
-    
+
     return 0;
 }
-
