@@ -12,12 +12,7 @@ using namespace std;
 
 typedef int Status;
 
-typedef struct elemtype
-{
-    char name[20];
-    char sex;
-    int score;
-} ElemType;
+typedef char ElemType;
 
 typedef struct sqlist
 {

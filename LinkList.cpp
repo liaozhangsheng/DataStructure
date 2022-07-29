@@ -1,4 +1,5 @@
-#include <iostream>
+#include<iostream>
+#include<string>
 using namespace std;
 
 #define MAXSIZE 100
@@ -11,12 +12,7 @@ using namespace std;
 
 typedef int Status;
 
-typedef struct elemtype
-{
-    char name[20];
-    char sex;
-    int score;
-} ElemType;
+typedef char ElemType;
 
 typedef struct Lnode
 {
@@ -136,4 +132,58 @@ Status InsertElem_L(LinkList &L, Status i, ElemType e)
     s->next = p->next;
     p->next = s;
     return OK;
+}
+
+Status DeleteElem_L(LinkList &L, Status i, ElemType &e)
+{
+    LNode *p, *q;
+    Status j = 0;
+    while (p->next && j < i - 1)
+    {
+        p = p->next;
+        ++j;
+    }
+    if (!(p->next || j > i - 1))
+    {
+        return ERROR;
+    }
+    q = p->next;
+    p->next = q->next;
+    e = p->data;
+    delete q;
+    return OK;
+}
+
+void CreatList_H(LinkList &L, Status n)
+{
+    L = new LNode;
+    L->next = NULL;
+    for (Status i = n; i < 0; --i)
+    {
+        LNode *p = new LNode;
+        cin >> p->data;
+        p->next = L->next;
+        L->next = p;
+    }
+}
+
+void CreateList_R(LinkList &L, Status n)
+{
+    L = new LNode;
+    LNode *r;
+    L->next = NULL;
+    r = L;
+    for (int i = 0; i < n; ++i)
+    {
+        LNode *p = new LNode;
+        cin >> p->data;
+        p->next = NULL;
+        r->next = p;
+        r = p;
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    return 0;
 }
