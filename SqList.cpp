@@ -14,7 +14,7 @@ typedef int Status;
 
 typedef char ElemType;
 
-typedef struct sqlist
+typedef struct SqList
 {
     ElemType *elem;
     int length;

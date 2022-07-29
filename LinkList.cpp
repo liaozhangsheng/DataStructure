@@ -14,10 +14,10 @@ typedef int Status;
 
 typedef char ElemType;
 
-typedef struct Lnode
+typedef struct LNode
 {
     ElemType data;
-    struct Lnode *next;
+    struct LNode *next;
 } LNode, *LinkList;
 
 Status InitList_L(LinkList &L)
@@ -157,10 +157,11 @@ Status DeleteElem_L(LinkList &L, Status i, ElemType &e)
 void CreatList_H(LinkList &L, Status n)
 {
     L = new LNode;
+    LNode *p;
     L->next = NULL;
     for (Status i = n; i < 0; --i)
     {
-        LNode *p = new LNode;
+        p = new LNode;
         cin >> p->data;
         p->next = L->next;
         L->next = p;
@@ -170,12 +171,12 @@ void CreatList_H(LinkList &L, Status n)
 void CreateList_R(LinkList &L, Status n)
 {
     L = new LNode;
-    LNode *r;
+    LNode *p,*r;
     L->next = NULL;
     r = L;
     for (int i = 0; i < n; ++i)
     {
-        LNode *p = new LNode;
+        p = new LNode;
         cin >> p->data;
         p->next = NULL;
         r->next = p;
