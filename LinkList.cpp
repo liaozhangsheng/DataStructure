@@ -1,5 +1,4 @@
-#include<iostream>
-#include<string>
+#include <iostream>
 using namespace std;
 
 #define MAXSIZE 100
@@ -19,6 +18,12 @@ typedef struct LNode
     ElemType data;
     struct LNode *next;
 } LNode, *LinkList;
+
+typedef struct DuLNode
+{
+    ElemType data;
+    struct DuLNode *prior, *next;
+} DuLNode, *DuLinkList;
 
 Status InitList_L(LinkList &L)
 {
@@ -171,7 +176,7 @@ void CreatList_H(LinkList &L, Status n)
 void CreateList_R(LinkList &L, Status n)
 {
     L = new LNode;
-    LNode *p,*r;
+    LNode *p, *r;
     L->next = NULL;
     r = L;
     for (int i = 0; i < n; ++i)
@@ -187,4 +192,63 @@ void CreateList_R(LinkList &L, Status n)
 int main(int argc, char const *argv[])
 {
     return 0;
+}
+
+//循环链表合并
+LinkList Connect(LinkList Ta, LinkList Tb)
+{
+    LNode *p;
+    p = Ta->next;
+    Ta->next = Tb->next->next;
+    delete Tb->next;
+    Tb->next = p;
+    return Tb;
+}
+
+//双向链表
+DuLinkList GetElem_DuL(DuLinkList &L, Status i)
+{
+    DuLNode *p;
+    Status j = 1;
+    p = L->next;
+    while (p && j < i)
+    {
+        p = p->next;
+        ++j;
+    }
+    if (!p || j > i)
+    {
+        return ERROR;
+    }
+    return p;
+}
+
+Status ListInsert_DuL(DuLinkList &L, Status i, ElemType e)
+{
+    DuLNode *s, *p;
+    if (!(p = GetElem_DuL(L, i)))
+    {
+        return ERROR;
+    }
+    s = new DuLNode;
+    s->data = e;
+    s->prior = p->prior;
+    p->prior->next = s;
+    s->next = p;
+    p->prior = s;
+    return OK;
+}
+
+Status DeleteElem_DuL(DuLinkList &L,Status i,ElemType &e)
+{
+    DuLNode *p;
+    if (!(p = GetElem_DuL(L, i)))
+    {
+        return ERROR;
+    }
+    p->prior->next = p->next;
+    p->next->prior = p->prior;
+    e = p->data;
+    delete p;
+    return OK;
 }

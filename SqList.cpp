@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 #define MAXSIZE 100
