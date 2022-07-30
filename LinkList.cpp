@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-#define MAXSIZE 100
 #define TRUE 1
 #define FALSE 0
 #define OK 1
@@ -25,7 +24,7 @@ typedef struct DuLNode
     struct DuLNode *prior, *next;
 } DuLNode, *DuLinkList;
 
-Status InitList_L(LinkList &L)
+Status InitList(LinkList &L)
 {
     L = new LNode;
     L->next = NULL;
@@ -63,7 +62,7 @@ Status ClearList_L(LinkList &L)
     return OK;
 }
 
-Status Length_L(LinkList L)
+Status GetLength_L(LinkList L)
 {
     LNode *p;
     Status length = 0;
@@ -87,9 +86,7 @@ Status GetElem_L(LinkList L, Status i, ElemType &e)
         ++j;
     }
     if (!p || j > i)
-    {
         return ERROR;
-    }
     e = p->data;
     return OK;
 }
@@ -129,9 +126,7 @@ Status InsertElem_L(LinkList &L, Status i, ElemType e)
         ++j;
     }
     if (!p || j > i - 1)
-    {
         return ERROR;
-    }
     s = new LNode;
     s->data = e;
     s->next = p->next;
@@ -149,9 +144,7 @@ Status DeleteElem_L(LinkList &L, Status i, ElemType &e)
         ++j;
     }
     if (!(p->next || j > i - 1))
-    {
         return ERROR;
-    }
     q = p->next;
     p->next = q->next;
     e = p->data;
@@ -189,12 +182,7 @@ void CreateList_R(LinkList &L, Status n)
     }
 }
 
-int main(int argc, char const *argv[])
-{
-    return 0;
-}
-
-//循环链表合并
+//循环链表连接
 LinkList Connect(LinkList Ta, LinkList Tb)
 {
     LNode *p;
@@ -239,7 +227,7 @@ Status ListInsert_DuL(DuLinkList &L, Status i, ElemType e)
     return OK;
 }
 
-Status DeleteElem_DuL(DuLinkList &L,Status i,ElemType &e)
+Status DeleteElem_DuL(DuLinkList &L, Status i, ElemType &e)
 {
     DuLNode *p;
     if (!(p = GetElem_DuL(L, i)))
@@ -251,4 +239,34 @@ Status DeleteElem_DuL(DuLinkList &L,Status i,ElemType &e)
     e = p->data;
     delete p;
     return OK;
+}
+
+void MergeList_L(LinkList &La, LinkList &Lb, LinkList &Lc)
+{
+    LNode *pa, *pb, *pc;
+    pa = La->next;
+    pb = Lb->next;
+    pc = Lc = La;
+    while (pa && pb)
+    {
+        if (pa->data <= pb->data)
+        {
+            pc->next = pa;
+            pc = pa;
+            pa = pa->next;
+        }
+        else
+        {
+            pc->next = pb;
+            pc = pb;
+            pb = pb->next;
+        }
+    }
+    pc->next = pa ? pa : pb;
+    delete Lb;
+}
+
+int main(int argc, char const *argv[])
+{
+    return 0;
 }

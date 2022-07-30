@@ -23,35 +23,33 @@ Status InitList_Sq(SqList &L)
 {
     L.elem = new ElemType[MAXSIZE];
     if (!L.elem)
-    {
         exit(OVERFLOW);
-    }
     L.length = 0;
     return OK;
 }
 
-void DestoryList(SqList &L)
+void DestoryList_Sq(SqList &L)
 {
     if (L.elem)
         delete L.elem;
 }
 
-void ClearList(SqList &L)
+void ClearList_Sq(SqList &L)
 {
     L.length = 0;
 }
 
-Status GetLength(SqList L)
+Status GetLength_Sq(SqList L)
 {
     return L.length;
 }
 
-Status IsEmpty(SqList L)
+Status IsEmpty_Sq(SqList L)
 {
     return L.length == 0 ? 1 : 0;
 }
 
-Status GetElem(SqList L, Status i, ElemType &e)
+Status GetElem_Sq(SqList L, Status i, ElemType &e)
 {
     if (i < 1 || i > L.length)
         return ERROR;
@@ -59,7 +57,7 @@ Status GetElem(SqList L, Status i, ElemType &e)
     return OK;
 }
 
-Status LocateElem(SqList L, ElemType e)
+Status LocateElem_Sq(SqList L, ElemType e)
 {
     for (int i = 0; i < L.length; i++)
     {
@@ -94,6 +92,44 @@ Status ListDelete_Sq(SqList &L, Status i, ElemType e)
     }
     L.length--;
     return OK;
+}
+
+void MergeList_Sq(SqList La, SqList Lb, SqList &Lc)
+{
+    ElemType *pa, *pb, *pc, *pa_last, *pb_last, *pc_last;
+    pa = La.elem;
+    pb = Lb.elem;
+    Lc.length = La.length + Lb.length;
+    Lc.elem = new ElemType[Lc.length];
+    pc = Lc.elem;
+    pa_last = La.elem + La.length - 1;
+    pb_last = Lb.elem + Lb.length - 1;
+    while (pa <= pa_last && pb <= pb_last)
+    {
+        if (*pa <= *pb)
+        {
+            *pc = *pa;
+            pa++;
+        }
+        else
+        {
+            *pc = *pb;
+            pb++;
+        }
+        pc++;
+    }
+    while (pa <= pa_last)
+    {
+        *pc = *pa;
+        pa++;
+        pc++;
+    }
+    while (pb <= pb_last)
+    {
+        *pc = *pb;
+        pb++;
+        pc++;
+    }
 }
 
 int main(int argc, char const *argv[])
