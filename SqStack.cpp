@@ -70,3 +70,8 @@ Status Pop_S(SqStack &S, SElemType &e)
     e = *--S.top;
     return OK;
 }
+
+int main(int argc, char const *argv[])
+{
+    return 0;
+}

@@ -60,3 +60,8 @@ Status GetTop_L(LinkStack S, SElemType &e)
     e = S->data;
     return OK;
 }
+
+int main(int argc, char const *argv[])
+{
+    return 0;
+}

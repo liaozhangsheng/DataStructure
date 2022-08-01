@@ -61,3 +61,7 @@ QElemType GetHead(SqQueue Q)
         return Q.base[Q.front];
 }
 
+int main(int argc, char const *argv[])
+{
+    return 0;
+}

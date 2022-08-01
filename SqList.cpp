@@ -11,17 +11,17 @@ using namespace std;
 
 typedef int Status;
 
-typedef char ElemType;
+typedef char LElemType;
 
 typedef struct SqList
 {
-    ElemType *elem;
+    LElemType *elem;
     int length;
 } SqList;
 
 Status InitList_Sq(SqList &L)
 {
-    L.elem = new ElemType[MAXSIZE];
+    L.elem = new LElemType[MAXSIZE];
     if (!L.elem)
         exit(OVERFLOW);
     L.length = 0;
@@ -49,7 +49,7 @@ Status IsEmpty_Sq(SqList L)
     return L.length == 0 ? 1 : 0;
 }
 
-Status GetElem_Sq(SqList L, Status i, ElemType &e)
+Status GetElem_Sq(SqList L, Status i, LElemType &e)
 {
     if (i < 1 || i > L.length)
         return ERROR;
@@ -57,7 +57,7 @@ Status GetElem_Sq(SqList L, Status i, ElemType &e)
     return OK;
 }
 
-Status LocateElem_Sq(SqList L, ElemType e)
+Status LocateElem_Sq(SqList L, LElemType e)
 {
     for (int i = 0; i < L.length; i++)
     {
@@ -67,7 +67,7 @@ Status LocateElem_Sq(SqList L, ElemType e)
     return 0;
 }
 
-Status ListInsert_Sq(SqList &L, Status i, ElemType e)
+Status ListInsert_Sq(SqList &L, Status i, LElemType e)
 {
     if (i < 1 || i > L.length + 1)
         return ERROR;
@@ -82,7 +82,7 @@ Status ListInsert_Sq(SqList &L, Status i, ElemType e)
     return OK;
 }
 
-Status ListDelete_Sq(SqList &L, Status i, ElemType e)
+Status ListDelete_Sq(SqList &L, Status i, LElemType e)
 {
     if (i < 1 || i > L.length)
         return ERROR;
@@ -96,11 +96,11 @@ Status ListDelete_Sq(SqList &L, Status i, ElemType e)
 
 void MergeList_Sq(SqList La, SqList Lb, SqList &Lc)
 {
-    ElemType *pa, *pb, *pc, *pa_last, *pb_last, *pc_last;
+    LElemType *pa, *pb, *pc, *pa_last, *pb_last, *pc_last;
     pa = La.elem;
     pb = Lb.elem;
     Lc.length = La.length + Lb.length;
-    Lc.elem = new ElemType[Lc.length];
+    Lc.elem = new LElemType[Lc.length];
     pc = Lc.elem;
     pa_last = La.elem + La.length - 1;
     pb_last = Lb.elem + Lb.length - 1;
@@ -134,6 +134,5 @@ void MergeList_Sq(SqList La, SqList Lb, SqList &Lc)
 
 int main(int argc, char const *argv[])
 {
-
     return 0;
 }

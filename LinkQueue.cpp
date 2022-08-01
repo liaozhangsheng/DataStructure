@@ -87,3 +87,8 @@ Status GetHead(LinkQueue Q, QElemType &e)
     e = Q.front->next->data;
     return OK;
 }
+
+int main(int argc, char const *argv[])
+{
+    return 0;
+}

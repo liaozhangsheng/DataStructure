@@ -10,17 +10,17 @@ using namespace std;
 
 typedef int Status;
 
-typedef char ElemType;
+typedef char LElemType;
 
 typedef struct LNode
 {
-    ElemType data;
+    LElemType data;
     struct LNode *next;
 } LNode, *LinkList;
 
 typedef struct DuLNode
 {
-    ElemType data;
+    LElemType data;
     struct DuLNode *prior, *next;
 } DuLNode, *DuLinkList;
 
@@ -75,7 +75,7 @@ Status GetLength_L(LinkList L)
     return length;
 }
 
-Status GetElem_L(LinkList L, Status i, ElemType &e)
+Status GetElem_L(LinkList L, Status i, LElemType &e)
 {
     LNode *p;
     Status j = 1;
@@ -91,7 +91,7 @@ Status GetElem_L(LinkList L, Status i, ElemType &e)
     return OK;
 }
 
-/* LNode *LocateElem_L(LinkList L, ElemType e)
+/* LNode *LocateElem_L(LinkList L, LElemType e)
 {
     LNode *p;
     p = L->next;
@@ -101,7 +101,7 @@ Status GetElem_L(LinkList L, Status i, ElemType &e)
     }
     return p;
 } */
-Status LocateElem_L(LinkList L, ElemType e)
+Status LocateElem_L(LinkList L, LElemType e)
 {
     LNode *p;
     Status j = 1;
@@ -116,7 +116,7 @@ Status LocateElem_L(LinkList L, ElemType e)
         return 0;
 }
 
-Status InsertElem_L(LinkList &L, Status i, ElemType e)
+Status InsertElem_L(LinkList &L, Status i, LElemType e)
 {
     LNode *p, *s;
     Status j = 0;
@@ -134,7 +134,7 @@ Status InsertElem_L(LinkList &L, Status i, ElemType e)
     return OK;
 }
 
-Status DeleteElem_L(LinkList &L, Status i, ElemType &e)
+Status DeleteElem_L(LinkList &L, Status i, LElemType &e)
 {
     LNode *p, *q;
     Status j = 0;
@@ -211,7 +211,7 @@ DuLinkList GetElem_DuL(DuLinkList &L, Status i)
     return p;
 }
 
-Status ListInsert_DuL(DuLinkList &L, Status i, ElemType e)
+Status ListInsert_DuL(DuLinkList &L, Status i, LElemType e)
 {
     DuLNode *s, *p;
     if (!(p = GetElem_DuL(L, i)))
@@ -227,7 +227,7 @@ Status ListInsert_DuL(DuLinkList &L, Status i, ElemType e)
     return OK;
 }
 
-Status DeleteElem_DuL(DuLinkList &L, Status i, ElemType &e)
+Status DeleteElem_DuL(DuLinkList &L, Status i, LElemType &e)
 {
     DuLNode *p;
     if (!(p = GetElem_DuL(L, i)))
